@@ -7,9 +7,20 @@ export default defineNuxtConfig({
     preset: './cloudflare-preset',
   },
 
-  modules: ['nitro-cloudflare-dev'],
+  modules: ['nitro-cloudflare-dev', '@nuxt/ui'],
 
   future: {
     compatibilityVersion: 4,
+  },
+
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: 'en',
+      },
+      bodyAttrs: {
+        class: 'bg-white dark:bg-gray-900',
+      },
+    },
   },
 });
