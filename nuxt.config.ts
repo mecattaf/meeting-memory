@@ -4,8 +4,12 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   nitro: {
-    preset: "./cloudflare-preset"
+    preset: './cloudflare-preset',
   },
 
-  modules: ["nitro-cloudflare-dev"]
-})
+  modules: ['nitro-cloudflare-dev'],
+
+  future: {
+    compatibilityVersion: 4,
+  },
+});
