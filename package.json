@@ -12,6 +12,8 @@
     "cf-typegen": "wrangler types"
   },
   "dependencies": {
+    "@iconify-json/heroicons": "^1.2.1",
+    "@iconify-json/simple-icons": "^1.2.10",
     "@nuxt/ui": "^2.18.7",
     "nuxt": "^3.13.2",
     "vue": "latest",
