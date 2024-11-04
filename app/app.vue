@@ -15,6 +15,7 @@
       </main>
     </div>
   </div>
+  <UNotifications />
 </template>
 
 <script setup lang="ts">
@@ -30,6 +31,6 @@ const title = computed(() => {
     return activeLink.label;
   }
 
-  return 'Create note';
+  return '';
 });
 </script>
