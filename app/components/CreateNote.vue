@@ -155,10 +155,11 @@ const handleRecordingStop = async () => {
       console.log('transcription:', transcription);
 
       note.value += note.value ? '\n\n' : '';
-      note.value = transcription ?? '';
+      note.value += transcription ?? '';
 
       recordings.value.unshift({
         url: URL.createObjectURL(blob),
+        blob,
         id: `${Date.now()}`,
       });
     } catch (err) {
@@ -190,12 +191,6 @@ const transcribeAudio = async (blob: Blob) => {
       method: 'POST',
       body: formData,
     });
-
-    // return await new Promise<string>((resolve) => {
-    //   setTimeout(() => {
-    //     resolve('[dummy] transcription...');
-    //   }, 2000);
-    // });
   } finally {
     isTranscribing.value = false;
   }
@@ -207,22 +202,30 @@ const clearNote = () => {
 };
 
 const saveNote = async () => {
-  if (!note.value.trim() && !state.value.isRecording) return;
+  if (!note.value.trim()) return;
 
   loading.value = true;
+
+  const noteToSave: { text: string; audioUrls?: string[] } = {
+    text: note.value.trim(),
+  };
+
   try {
+    if (recordings.value.length) {
+      noteToSave.audioUrls = await uploadRecordings();
+    }
+
     await $fetch('/api/notes', {
       method: 'POST',
-      body: {
-        title: `Untitled-${new Date().toLocaleDateString('en-US')}`,
-        content: note.value,
-      },
+      body: noteToSave,
     });
+
     useToast().add({
       title: 'Success',
       description: 'Note saved successfully',
       color: 'green',
     });
+
     note.value = '';
   } catch (err) {
     console.error('Error saving note:', err);
@@ -238,5 +241,24 @@ const saveNote = async () => {
 
 const deleteRecording = (recording: Recording) => {
   recordings.value = recordings.value.filter((r) => r.id !== recording.id);
+};
+
+const uploadRecordings = async () => {
+  if (!recordings.value.length) return;
+
+  const formData = new FormData();
+  recordings.value.forEach((recording) => {
+    console.log('blob type:', recording.blob.type);
+    formData.append('files', recording.blob, recording.id + '.webm');
+  });
+
+  const res = await $fetch('/api/upload', {
+    method: 'PUT',
+    body: formData,
+  });
+
+  return res.map((r: any) => {
+    return r.key;
+  });
 };
 </script>
