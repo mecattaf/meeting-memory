@@ -1,7 +1,7 @@
 #:schema node_modules/wrangler/config-schema.json
 name = "vnotes"
 compatibility_date = "2024-10-22"
-main = "./dist/worker/index.js"
+#main = "./dist/worker/index.js"
 assets = { directory = "./dist/public", binding = "ASSETS" }
 
 # Workers Logs
@@ -9,3 +9,15 @@ assets = { directory = "./dist/public", binding = "ASSETS" }
 # Configuration: https://developers.cloudflare.com/workers/observability/logs/workers-logs/#enable-workers-logs
 [observability]
 enabled = true
+
+[ai]
+binding = "AI"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "notes-db"
+database_id = "474fd68e-d3c6-4882-ac74-0e68d1fdda7e"
+
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "notes-bucket"
