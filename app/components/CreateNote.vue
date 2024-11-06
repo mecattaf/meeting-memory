@@ -115,6 +115,10 @@
 <script setup lang="ts">
 import type { Recording } from '~~/types';
 
+const emit = defineEmits<{
+  (e: 'created'): void;
+}>();
+
 const note = ref('');
 const loading = ref(false);
 const isTranscribing = ref(false);
@@ -227,6 +231,9 @@ const saveNote = async () => {
     });
 
     note.value = '';
+    recordings.value = [];
+
+    emit('created');
   } catch (err) {
     console.error('Error saving note:', err);
     useToast().add({

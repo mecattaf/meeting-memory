@@ -19,7 +19,10 @@
         />
       </template>
 
-      <CreateNote class="w-full max-w-7xl h-full mx-auto" />
+      <CreateNote
+        class="w-full max-w-7xl h-full mx-auto"
+        @created="closeModal"
+      />
     </UCard>
   </UModal>
 </template>
