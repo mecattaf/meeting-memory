@@ -7,7 +7,13 @@
 
     <div class="flex flex-col flex-1">
       <!-- The App Header -->
-      <AppHeader :title="title" />
+      <AppHeader :title="title">
+        <template #actions v-if="route.path === '/'">
+          <UButton icon="i-heroicons-plus" @click="navigateTo('/new')">
+            New Note
+          </UButton>
+        </template>
+      </AppHeader>
 
       <!-- Main Page Content -->
       <main class="bg-gray-50 dark:bg-gray-950 flex-1">
