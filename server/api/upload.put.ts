@@ -7,13 +7,13 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, message: 'Missing files' });
   }
 
-  const objs: R2Object[] = [];
+  const uploadKeys: string[] = [];
   for (const file of files) {
     const obj = await cloudflare.env.R2.put(`recordings/${file.name}`, file);
     if (obj) {
-      objs.push(obj);
+      uploadKeys.push(obj.key);
     }
   }
 
-  return objs;
+  return uploadKeys;
 });

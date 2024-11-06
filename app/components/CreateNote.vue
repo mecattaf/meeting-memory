@@ -252,13 +252,11 @@ const uploadRecordings = async () => {
     formData.append('files', recording.blob, recording.id + '.webm');
   });
 
-  const res = await $fetch('/api/upload', {
+  const uploadKeys = await $fetch('/api/upload', {
     method: 'PUT',
     body: formData,
   });
 
-  return res.map((r: any) => {
-    return r.key;
-  });
+  return uploadKeys;
 };
 </script>
