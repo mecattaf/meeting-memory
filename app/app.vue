@@ -1,11 +1,11 @@
 <template>
   <NuxtRouteAnnouncer />
   <NuxtLoadingIndicator />
-  <div class="flex flex-col md:flex-row">
+  <div class="h-screen flex flex-col md:flex-row">
     <!-- The App Sidebar -->
     <AppSidebar :links="links" />
 
-    <div class="flex flex-col flex-1">
+    <div class="flex-1 h-full min-w-0 bg-gray-50 dark:bg-gray-950">
       <!-- The App Header -->
       <AppHeader :title="title">
         <template #actions v-if="route.path === '/'">
@@ -16,7 +16,7 @@
       </AppHeader>
 
       <!-- Main Page Content -->
-      <main class="bg-gray-50 dark:bg-gray-950 flex-1">
+      <main class="p-4 sm:p-6 h-[calc(100vh-3.5rem)] overflow-y-auto">
         <NuxtPage />
       </main>
     </div>
