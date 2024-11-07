@@ -15,7 +15,20 @@ export default defineEventHandler(async (event) => {
       audio: [...new Uint8Array(await blob.arrayBuffer())],
     });
 
-    return response.text;
+    const postProcessingPrompt = form.get('prompt') as string;
+    if (postProcessingPrompt && response.text) {
+      const postProcessResult = await cloudflare.env.AI.run(
+        '@cf/meta/llama-3.1-8b-instruct',
+        {
+          temperature: 0.3,
+          prompt: `${postProcessingPrompt}.\n\nText:\n\n${response.text}\n\nResponse:`,
+        }
+      );
+
+      return (postProcessResult as { response?: string }).response;
+    } else {
+      return response.text;
+    }
   } catch (err) {
     console.error('Error transcribing audio:', err);
     throw createError({

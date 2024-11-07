@@ -113,7 +113,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Recording } from '~~/types';
+import { useStorageAsync } from '@vueuse/core';
+import type { Recording, Settings } from '~~/types';
 
 const emit = defineEmits<{
   (e: 'created'): void;
@@ -185,11 +186,23 @@ const toggleRecording = () => {
   }
 };
 
+const postProcessSettings = useStorageAsync<Settings>('vNotesSettings', {
+  postProcessingEnabled: false,
+  postProcessingPrompt: '',
+});
+
 const transcribeAudio = async (blob: Blob) => {
   try {
     isTranscribing.value = true;
     const formData = new FormData();
     formData.append('audio', blob);
+
+    if (
+      postProcessSettings.value.postProcessingEnabled &&
+      postProcessSettings.value.postProcessingPrompt
+    ) {
+      formData.append('prompt', postProcessSettings.value.postProcessingPrompt);
+    }
 
     return await $fetch('/api/transcribe', {
       method: 'POST',

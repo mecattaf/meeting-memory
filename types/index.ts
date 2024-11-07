@@ -11,3 +11,8 @@ export type Note = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type Settings = {
+  postProcessingEnabled: boolean;
+  postProcessingPrompt: string;
+};
