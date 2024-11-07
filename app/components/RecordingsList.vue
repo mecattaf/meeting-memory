@@ -5,9 +5,8 @@
       :key="recording.id"
       class="flex items-center gap-x-3 p-2 bg-gray-50 dark:bg-gray-800 rounded-lg"
     >
-      <div class="flex-1">
-        <audio :src="recording.url" controls class="w-full" />
-      </div>
+      <audio :src="recording.url" controls class="w-full h-10" />
+
       <UTooltip text="Remove recording">
         <UButton
           icon="i-heroicons-trash"
