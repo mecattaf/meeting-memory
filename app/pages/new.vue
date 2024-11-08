@@ -5,7 +5,7 @@
         base: 'h-full flex flex-col',
         rounded: '',
         body: {
-          base: 'flex-grow',
+          base: 'flex-grow overflow-hidden',
         },
       }"
     >
@@ -19,10 +19,7 @@
         />
       </template>
 
-      <CreateNote
-        class="w-full max-w-7xl h-full mx-auto"
-        @created="closeModal"
-      />
+      <CreateNote class="max-w-7xl mx-auto h-full" @created="closeModal" />
     </UCard>
   </UModal>
 </template>

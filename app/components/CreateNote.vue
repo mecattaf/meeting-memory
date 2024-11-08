@@ -1,40 +1,37 @@
 <template>
-  <div class="flex flex-col">
-    <div class="flex flex-col h-full md:flex-row md:gap-x-6">
-      <div class="flex-1 flex flex-col">
-        <div class="md:hidden mb-4">
-          <RecordingsList
-            :recordings="recordings"
-            @delete="deleteRecording"
-            class="max-h-40 overflow-y-auto"
-          />
-        </div>
-
-        <UCard
-          :ui="{ base: 'h-full flex flex-col', body: { base: 'flex-grow' } }"
-        >
-          <template #header>
-            <h3
-              class="text-base md:text-lg font-medium text-gray-600 dark:text-gray-300"
-            >
-              Note transcript
-            </h3>
-          </template>
-          <UTextarea
-            v-model="note"
-            placeholder="Type your note or use voice recording..."
-            size="lg"
-            autofocus
-            :disabled="loading || isTranscribing || state.isRecording"
-            :rows="12"
-            :maxrows="20"
-          />
-        </UCard>
-      </div>
+  <div class="flex flex-col gap-y-5">
+    <div
+      class="flex flex-col h-full md:flex-row gap-y-4 md:gap-x-6 overflow-hidden p-px"
+    >
+      <UCard
+        :ui="{
+          base: 'h-full flex flex-col flex-1',
+          body: { base: 'flex-grow' },
+          header: { base: 'md:h-[72px]' },
+        }"
+      >
+        <template #header>
+          <h3
+            class="text-base md:text-lg font-medium text-gray-600 dark:text-gray-300"
+          >
+            Note transcript
+          </h3>
+        </template>
+        <UTextarea
+          v-model="note"
+          placeholder="Type your note or use voice recording..."
+          size="lg"
+          autofocus
+          :disabled="loading || isTranscribing || state.isRecording"
+          :rows="10"
+        />
+      </UCard>
 
       <UCard
-        class="hidden md:flex md:flex-col md:h-full w-96 shrink-0"
-        :ui="{ body: { base: 'flex-grow' } }"
+        class="md:h-full md:flex md:flex-col md:w-96 shrink-0 order-first md:order-none"
+        :ui="{
+          body: { base: 'max-h-36 md:max-h-none md:flex-grow overflow-y-auto' },
+        }"
       >
         <template #header>
           <h3
@@ -61,14 +58,14 @@
 
         <AudioVisualizer
           v-if="state.isRecording"
-          class="w-full h-16 p-2 bg-gray-50 dark:bg-gray-800 rounded-lg mb-2"
+          class="w-full h-14 p-2 bg-gray-50 dark:bg-gray-800 rounded-lg mb-2"
           :audio-data="state.audioData"
           :data-update-trigger="state.updateTrigger"
         />
 
         <div
           v-else-if="isTranscribing"
-          class="flex items-center justify-center h-16 gap-x-3 p-2 bg-gray-50 dark:bg-gray-800 rounded-lg mb-2 text-gray-500 dark:text-gray-400"
+          class="flex items-center justify-center h-14 gap-x-3 p-2 bg-gray-50 dark:bg-gray-800 rounded-lg mb-2 text-gray-500 dark:text-gray-400"
         >
           <UIcon
             name="i-heroicons-arrow-path-20-solid"
@@ -80,14 +77,16 @@
         <RecordingsList :recordings="recordings" @delete="deleteRecording" />
 
         <div
-          v-if="!recordings.length"
+          v-if="!recordings.length && !state.isRecording && !isTranscribing"
           class="h-full flex items-center justify-center text-gray-500 dark:text-gray-400"
         >
           No recordings...
         </div>
       </UCard>
     </div>
-    <UDivider class="my-4 sm:my-6" />
+
+    <UDivider />
+
     <div class="flex justify-end gap-x-4">
       <UButton
         icon="i-heroicons-trash"
