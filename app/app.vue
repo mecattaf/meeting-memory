@@ -12,7 +12,7 @@
     </USlideover>
 
     <!-- The App Sidebar -->
-    <AppSidebar :links="links" class="hidden md:block" />
+    <AppSidebar :links="links" class="hidden md:block md:w-64" />
 
     <div class="flex-1 h-full min-w-0 bg-gray-50 dark:bg-gray-950">
       <!-- The App Header -->

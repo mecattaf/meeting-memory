@@ -7,8 +7,8 @@
       v-else
       class="flex-1 self-center text-center text-gray-500 dark:text-gray-400 space-y-2"
     >
-      <h2 class="text-2xl md:text-3xl">No notes found</h2>
-      <p>Get started by creating a new note</p>
+      <h2 class="text-2xl md:text-3xl">No notes created</h2>
+      <p>Get started by creating your first note</p>
     </div>
   </div>
 </template>
