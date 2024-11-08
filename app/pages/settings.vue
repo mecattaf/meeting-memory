@@ -6,8 +6,10 @@
           Post Processing
         </h2>
         <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-          Configure automatic post-processing of recording transcriptions using
-          AI models. Changes will be saved automatically.
+          Configure post-processing of recording transcriptions with AI models.
+        </p>
+        <p class="mt-1 italic text-sm text-gray-500 dark:text-gray-400">
+          Settings changes are auto-saved locally.
         </p>
       </div>
     </template>
