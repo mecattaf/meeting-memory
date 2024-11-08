@@ -2,12 +2,21 @@
   <NuxtRouteAnnouncer />
   <NuxtLoadingIndicator />
   <div class="h-screen flex flex-col md:flex-row">
+    <USlideover
+      v-model="isDrawerOpen"
+      class="md:hidden"
+      side="left"
+      :ui="{ width: 'max-w-xs' }"
+    >
+      <AppSidebar :links="links" @hide-drawer="isDrawerOpen = false" />
+    </USlideover>
+
     <!-- The App Sidebar -->
-    <AppSidebar :links="links" />
+    <AppSidebar :links="links" class="hidden md:block" />
 
     <div class="flex-1 h-full min-w-0 bg-gray-50 dark:bg-gray-950">
       <!-- The App Header -->
-      <AppHeader :title="title">
+      <AppHeader :title="title" @show-drawer="isDrawerOpen = true">
         <template #actions v-if="route.path === '/'">
           <UButton icon="i-heroicons-plus" @click="navigateTo('/new')">
             New Note
@@ -25,9 +34,20 @@
 </template>
 
 <script setup lang="ts">
+const isDrawerOpen = ref(false);
 const links = [
-  { label: 'Notes', icon: 'i-heroicons-document-text', to: '/' },
-  { label: 'Settings', icon: 'i-heroicons-cog', to: '/settings' },
+  {
+    label: 'Notes',
+    icon: 'i-heroicons-document-text',
+    to: '/',
+    click: () => (isDrawerOpen.value = false),
+  },
+  {
+    label: 'Settings',
+    icon: 'i-heroicons-cog',
+    to: '/settings',
+    click: () => (isDrawerOpen.value = false),
+  },
 ];
 
 const route = useRoute();
