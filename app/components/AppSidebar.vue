@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-screen w-full shrink-0 border-r border-gray-200 dark:border-gray-800"
+    class="h-screen flex-col w-full shrink-0 border-r border-gray-200 dark:border-gray-800"
   >
     <div class="flex items-center justify-between px-4 h-14">
       <ULink class="font-bold text-2xl md:text-3xl px-2.5" to="/">
@@ -16,6 +16,38 @@
     </div>
 
     <UVerticalNavigation class="p-4" :links="links" />
+
+    <div class="flex-1" />
+
+    <div class="text-center space-y-4 pb-8">
+      <p>Made with ❤️ by Rajeev</p>
+      <div class="flex items-center justify-center gap-x-4">
+        <UButton
+          to="https://x.com/ra_jeeves"
+          icon="i-simple-icons-x"
+          aria-label="twitter/x"
+          color="gray"
+          target="_blank"
+          variant="ghost"
+        />
+        <UButton
+          to="https://bsky.app/profile/rajeev.dev"
+          icon="i-simple-icons-bluesky"
+          aria-label="BlueSky App"
+          color="gray"
+          target="_blank"
+          variant="ghost"
+        />
+        <UButton
+          icon="i-simple-icons-github"
+          color="gray"
+          variant="ghost"
+          to="https://github.com/ra-jeev/vnotes"
+          target="_blank"
+        />
+        <ColorMode />
+      </div>
+    </div>
   </div>
 </template>
 

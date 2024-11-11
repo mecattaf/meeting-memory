@@ -8,11 +8,15 @@
       side="left"
       :ui="{ width: 'max-w-xs' }"
     >
-      <AppSidebar :links="links" @hide-drawer="isDrawerOpen = false" />
+      <AppSidebar
+        :links="links"
+        @hide-drawer="isDrawerOpen = false"
+        class="flex"
+      />
     </USlideover>
 
     <!-- The App Sidebar -->
-    <AppSidebar :links="links" class="hidden md:block md:w-64" />
+    <AppSidebar :links="links" class="hidden md:flex md:w-64" />
 
     <div class="flex-1 h-full min-w-0 bg-gray-50 dark:bg-gray-950">
       <!-- The App Header -->
