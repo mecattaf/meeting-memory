@@ -2,6 +2,12 @@
 
 A serverless voice notes application built with Nuxt 3, Cloudflare Workers, Workers AI, D1 Database, and R2 Storage. This app allows users to record voice notes, transcribe them using AI, store them in a database, and manage them through a simple, intuitive interface.
 
+Live demo: <https://vnotes.rajeevs.workers.dev>
+
+![VNotes Home Page](.github/screenshots/vnotes-home.png)
+
+![VNotes Note Creation Page](.github/screenshots/vnotes-create.png)
+
 ## Features
 
 - Record Voice Notes: Record audio directly from the app (supports multiple recordings per note).
@@ -81,6 +87,8 @@ pnpm run deploy # or nom/yarn run deploy
 - Transcription: After the audio is recorded, the transcription is automatically generated using an AI model (Whisper).
 - Post-Processing: Users can enable optional post-processing to correct and refine the transcription using another AI model (Llama-3.1).
 - Displaying Notes: All notes are displayed on the main page, where users can listen to the audio and view the transcription.
+
+![VNotes Settings Page](.github/screenshots/vnotes-settings.png)
 
 ## Contributing
 
